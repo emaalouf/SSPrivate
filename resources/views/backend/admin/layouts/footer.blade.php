@@ -5,7 +5,7 @@
                 <ul class="nav">
                     <li class="nav-item">
                         <a href="{{ route('admin.index') }}">
-                            {{config('app.name')}}
+                            SafeSense UI
                         </a>
                         , Copyright &copy; {{date('Y')}}. All right reserved.
                     </li>

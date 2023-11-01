@@ -1,6 +1,6 @@
 <div class="app-sidebar sidebar-shadow bg-asteroid sidebar-text-light">
     <div class="app-header__logo">
-        <div class="logo-src"></div>
+        <div></div>
         <div class="header__pane ml-auto">
             <div>
                 <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
@@ -36,48 +36,33 @@
                 <li>
                     <a href="{{route('admin.index')}}" class="sidebar-item">
                         <i class="metismenu-icon pe-7s-home"></i>
-                        Home
+                        Dashboard
                     </a>
                 </li>
-                <li class="app-sidebar__heading">Products & Categories</li>
-                <li>
-                    <a href="{{route('admin.categories.index')}}" class="sidebar-item">
-                        <i class="metismenu-icon pe-7s-menu"></i>
-                        Categories
-                    </a>
-                </li>
-                <li class="app-sidebar__heading">User Management</li>
+                <li class="app-sidebar__heading">History</li>
                 <li>
                     <a href="{{route('admin.client-users.index')}}" class="sidebar-item">
                         <i class="metismenu-icon pe-7s-users"></i>
-                        Users
+                        History
                     </a>
                 </li>
+                <li class="app-sidebar__heading">Alerts</li>
                 <li>
-                    <a href="{{route('admin.admin-users.index')}}" class="sidebar-item">
+                    <a href="{{route('admin.categories.index')}}" class="sidebar-item">
+                        <i class="metismenu-icon pe-7s-menu"></i>
+                        Alerts
+                    </a>
+                </li>
+                <li class="app-sidebar__heading">User</li>
+                <li>
+                    <a href="{{route('admin.client-users.index')}}" class="sidebar-item">
                         <i class="metismenu-icon pe-7s-users"></i>
-                        Admin Users
+                        Logout
                     </a>
                 </li>
-                <li class="app-sidebar__heading">Roles & Permissions</li>
-                <li>
-                    <a href="{{route('admin.roles.index')}}?guard={{config('custom_guards.default.user')}}" class="sidebar-item">
-                        <i class="metismenu-icon pe-7s-helm"></i>
-                        User Roles
-                    </a>
-                </li>
-                <li>
-                    <a href="{{route('admin.roles.index')}}?guard={{config('custom_guards.default.admin')}}" class="sidebar-item">
-                        <i class="metismenu-icon pe-7s-helm"></i>
-                        Admin Users Roles
-                    </a>
-                </li>
-                <li>
-                    <a href="{{route('admin.permissions.index')}}" class="sidebar-item">
-                        <i class="metismenu-icon pe-7s-door-lock"></i>
-                        Permissions
-                    </a>
-                </li>
+               
+
+               
             </ul>
         </div>
     </div>

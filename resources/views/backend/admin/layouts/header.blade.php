@@ -29,7 +29,7 @@
             </button>
         </span>
     </div>
-    <div class="app-header__content">
+    <!-- <div class="app-header__content">
         <div class="app-header-left">
             <div class="search-wrapper">
                 <div class="input-holder">
@@ -104,5 +104,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>

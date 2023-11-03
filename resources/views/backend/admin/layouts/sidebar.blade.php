@@ -39,9 +39,16 @@
                         Dashboard
                     </a>
                 </li>
+
+                <li>
+                    <a href="{{route('admin.index')}}" class="sidebar-item">
+                        <i class="metismenu-icon pe-7s-home"></i>
+                        Temperature
+                    </a>
+                </li>
                 <li class="app-sidebar__heading">History</li>
                 <li>
-                    <a href="{{route('admin.client-users.index')}}" class="sidebar-item">
+                    <a href="/history" class="sidebar-item">
                         <i class="metismenu-icon pe-7s-users"></i>
                         History
                     </a>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\Admin;
 
 use Hash;
+use Http;
 use App\Helper\ResponseHelper;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

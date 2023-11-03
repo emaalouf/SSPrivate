@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\Backend\Admin\IndexController;
 
 Route::namespace('Frontend\Client')->group(function() {
     Auth::routes();
@@ -12,3 +13,5 @@ Route::namespace('Frontend\Client')->group(function() {
 Route::namespace('Frontend')->group(function() {
     Route::get('/', 'PageController@index');
 });
+
+Route::get('/history', [IndexController::class, 'history'])->name('history');

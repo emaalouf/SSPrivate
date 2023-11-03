@@ -8,12 +8,12 @@ Route::name('admin.')
     // Auth
     Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
     Route::post('/login', 'Auth\LoginController@login')->name('login');
+    
 
     Route::middleware(['auth:admin'])->group(function () {
         Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
         Route::resource('permissions', 'PermissionsController')->only(['index', 'create', 'store']);
-
         Route::resource('roles', 'RolesController');
 
         Route::resource('admin-users', 'AdminUsersController');

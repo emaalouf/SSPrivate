@@ -3,7 +3,7 @@
         <div class="card mb-3 widget-content bg-midnight-bloom">
             <div class="widget-content-wrapper text-white">
                 <div class="widget-content-left">
-                    <div class="widget-heading">Room1</div>
+                    <div class="widget-heading"><a href="/room">Room1</a></div>
                     <div class="widget-subheading">People Count</div>
                 </div>
                 <div class="widget-content-right">

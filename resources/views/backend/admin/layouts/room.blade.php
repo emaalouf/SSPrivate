@@ -27,7 +27,16 @@
                     <h3 class="text-success">Live Map</h3>
                     <!-- Add your live map content here -->
                     <div id="live-map-content" class="interactive-content">
-                        <!-- Interactive content goes here -->
+                        <!-- Content for the Live Map tab -->
+<div class="content-container">
+    <h3 class="text-success">Live Map</h3>
+
+    <div id="live-map-content" class="interactive-content">
+        <!-- Display thermal images here -->
+
+    </div>
+</div>
+
                     </div>
                 </div>
             </div>

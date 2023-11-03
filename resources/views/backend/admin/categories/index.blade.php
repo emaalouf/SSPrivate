@@ -20,49 +20,91 @@
 @endsection
 
 @section('content')
-    <div class="container">
-        <h2>Notification Form</h2>
-        <h6>Room Number: 1</h6>
-        <h6>Device Number: 1</h6>
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Notification Form</h2>
+            </div>
+            <div class="card-body">
+                <form id="notificationForm">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="minHeadCount">Min Head Count:</label>
+                            <input type="number" class="form-control" id="minHeadCount" name="minHeadCount" required min="1">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="maxHeadCount">Max Head Count:</label>
+                            <input type="number" class="form-control" id="maxHeadCount" name="maxHeadCount" required min="1">
+                        </div>
+                    </div>
 
-        <form id="notificationForm">
-            <label for="headCount">Head Count:</label>
-            <input type="number" id="headCount" name="headCount" required><br>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email">
+                    </div>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email"><br>
+                    <div class="form-group">
+                        <label for="sms">SMS:</label>
+                        <input type="text" class="form-control" id="sms" name="sms">
+                    </div>
 
-            <label for="sms">SMS:</label>
-            <input type="text" id="sms" name="sms"><br>
+                    <div class="form-group">
+                        <label for="notificationMethod">Alert Type:</label>
+                        <select class="form-control" id="notificationMethod" name="notificationMethod" required>
+                            <option value="email">Send Email</option>
+                            <option value="sms">Send SMS</option>
+                            <option value="email+sms">Send SMS & Email</option>
+                        </select>
+                    </div>
 
-            <label for="notificationMethod">Alert Type:</label>
-            <select id="notificationMethod" name="notificationMethod" required>
-                <option value="email">Send Email</option>
-                <option value="sms">Send SMS</option>
-                <option value="email+sms">Send SMS & Email</option>
-            </select><br>
-
-            <button type="button" onclick="sendNotification()">Submit</button>
-        </form>
+                    <button type="button" class="btn btn-primary" onclick="sendNotification()">Submit</button>
+                </form>
+            </div>
+        </div>
     </div>
 
     <script>
-        function sendNotification() {
-            var headCount = document.getElementById('headCount').value;
-            var email = document.getElementById('email').value;
-            var sms = document.getElementById('sms').value;
-            var notificationMethod = document.getElementById('notificationMethod').value;
 
-            if (headCount >= 10 && notificationMethod === 'email') {
-                alert('Sending email notification to specified recipients: ' + email);
-                // Add your email notification logic here
-            } else if (headCount >= 5 && notificationMethod === 'sms') {
-                alert('Sending SMS notification to specified recipients: ' + sms);
-                // Add your SMS notification logic here
-            } else {
+function sendNotification() {
+    // ... (existing code)
+
+    // AJAX request
+    $.ajax({
+        type: 'POST',
+        url: '{{ route("admin.sendNotification") }}', // Update the route name
+        data: {
+            minHeadCount: minHeadCount,
+            maxHeadCount: maxHeadCount,
+            email: email,
+            sms: sms,
+            notificationMethod: notificationMethod,
+        },
+        success: function (response) {
+            alert('Notification Send Successfully');
+        },
+        error: function (error) {
+            console.error('Error sending notification:', error);
+        },
+    });
+}
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            function sendNotification() {
+                var minHeadCount = document.getElementById('minHeadCount').value;
+                var maxHeadCount = document.getElementById('maxHeadCount').value;
+                var email = document.getElementById('email').value;
+                var sms = document.getElementById('sms').value;
+                var notificationMethod = document.getElementById('notificationMethod').value;
+
+                // Your validation logic based on minHeadCount and maxHeadCount here
+
                 alert('Notification Send Successfully');
             }
-        }
+
+            var submitBtn = document.getElementById('submitBtn');
+            submitBtn.addEventListener('click', sendNotification);
+        });
     </script>
 @endsection
 
@@ -70,7 +112,7 @@
     <script>
         var route_model_name = "categories";
         var app_table;
-        $(function () {
+        document.addEventListener('DOMContentLoaded', function () {
             app_table = $('.data-table').DataTable({
                 // DataTable initialization code
             });

@@ -10,44 +10,54 @@ use Khill\Lavacharts\Lavacharts;
 
 class IndexController extends Controller
 {
-    public function index() 
-    {
-        $client = new Client();
-        $response = $client->get('https://7c24-15-160-10-141.ngrok-free.app/api/records');
-      
-        $records = json_decode($response->getBody(), true);
-        $dataCollection = [];
+    public function index()
+{
+    $client = new Client();
 
-        if (isset($records['records'])) {
-            foreach ($records['records'] as $record) {
-                $recordData = json_decode($record['record'], true);
-                $headCount = $recordData['head_count'];
-                $date = $recordData['date'];
-                $time = $recordData['time'];
+    // Fetch records
+    $responseRecords = $client->get('https://7c24-15-160-10-141.ngrok-free.app/api/records');
+    $records = json_decode($responseRecords->getBody(), true);
 
-                // Include the entire record data
-                $rawData = json_decode($record['record'], true);
-                $raw = $rawData['raw'];
+    $dataCollection = [];
 
-                
+    if (isset($records['records'])) {
+        foreach ($records['records'] as $record) {
+            $recordData = json_decode($record['record'], true);
+            $headCount = $recordData['head_count'];
+            $date = $recordData['date'];
+            $time = $recordData['time'];
 
-                // Collect data into an array
-                $dataCollection[] = [
-                    'head_count' => $headCount,
-                    'date' => $date,
-                    'time' => $time,
-                    'raw_data' => $rawData, // Keep the entire raw data if needed
-                    'raw' => $raw, // Add the 'raw' field to the array
-                ];
-                
-            }
+            // Include the entire record data
+            $rawData = json_decode($record['record'], true);
+            $raw = $rawData['raw'];
+
+            // Collect data into an array
+            $dataCollection[] = [
+                'head_count' => $headCount,
+                'date' => $date,
+                'time' => $time,
+                'raw_data' => $rawData, // Keep the entire raw data if needed
+                'raw' => $raw, // Add the 'raw' field to the array
+            ];
+
+            // Store head_count in the session
+            session(['data_collection' => $dataCollection]);
         }
-        
-        $lastRecord = end($dataCollection);
-  
-        return view('backend.admin.layouts.room')
-            ->with('lastRecord', $lastRecord);
     }
+
+    // Fetch thermal data
+    $responseImages = $client->get('https://7c24-15-160-10-141.ngrok-free.app/api/recordimages');
+    $imageData = json_decode($responseImages->getBody(), true);
+    $thermalData = isset($imageData['thermal_data']) ? $imageData['thermal_data'] : null;
+
+    $lastRecord = end($dataCollection);
+
+    return view('backend.admin.layouts.room')->with([
+        'lastRecord' => $lastRecord,
+        'imageData' => $imageData,
+        'thermalData' => $thermalData,
+    ]);
+}
 
     public function history()
     {
